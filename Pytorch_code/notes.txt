@@ -1,0 +1,8 @@
+to activate conda do 
+eval "$(conda shell.bash hook)"
+conda activate my_env
+
+
+
+
+use sbatch to run .sh file
