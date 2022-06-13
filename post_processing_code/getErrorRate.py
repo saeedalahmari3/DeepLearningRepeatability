@@ -29,7 +29,7 @@ for foldName in foldNames:
     for mouseName in MiceNames:
         mouseName = mouseName+'_'
         pathToPredictions1 = os.path.join(path2Experiment,foldName,'PredictedMasks2','predMasks','OldPostprocessing_0.5')
-        pathToResults = os.path.join(path2Experiment,foldName,'PredictedMasks2')
+        pathToResults = path2Experiment
         pathToPredictions = pathToPredictions1
         def getDiceCoef(diceCoef):
             dice_mean = 0.0
