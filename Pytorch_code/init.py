@@ -26,7 +26,7 @@ def weights_init2(model):
     return model
 
 def weights_initFromKeras2(model):
-    kerasWeights = np.load(os.path.join('..','kerasInitWeights','KerasInitialWeights_seed2019.npy'),allow_pickle=True)
+    kerasWeights = np.load(os.path.join('.','kerasInitWeights','KerasInitialWeights_seed2019.npy'),allow_pickle=True)
     convCounter = 0
     model_newWeights = {}
     stat_dict = model.state_dict()

@@ -132,6 +132,7 @@ def trainModel(path2Data,seed,iterationNum, GPU, precision ,mode = 'train', nb_e
         f.write(total_time)
         f.write('sec')
         f.close()
+        print('Done')
 
     elif mode == 'test':
         start_time = time.time()
@@ -146,11 +147,11 @@ def trainModel(path2Data,seed,iterationNum, GPU, precision ,mode = 'train', nb_e
 
         # ***********  Prediction here:
         print('-'*30)
-        print('Now prediction')
+        print('Now making prediction')
         imgs_mask_pred = model.predict(x = testImgs)
         #imgs_mask_pred = pred_to_imgs(imgs_mask_pred, img_width, img_hight, mode="original")
         imgs_mask_pred = imgs_mask_pred[:,1,:,:]
-        pred_dir_test = os.path.join(taskPath,'PredictedMasks',task+'_predMasks')
+        pred_dir_test = os.path.join(taskPath,'PredictedMasks2','predMasks')
         if not os.path.exists(pred_dir_test):
             os.makedirs(pred_dir_test)
         SaveMsksToFile(imgs_mask_pred,testIDs,pred_dir_test)
@@ -161,6 +162,7 @@ def trainModel(path2Data,seed,iterationNum, GPU, precision ,mode = 'train', nb_e
         f.write(total_time)
         f.write('sec')
         f.close()
+        print('Done')
 
 if __name__ == "__main__":
 

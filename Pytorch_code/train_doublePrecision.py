@@ -103,7 +103,7 @@ def trainModel(path2Data,seed,iterationNum,GPU ,mode = 'train', nb_epoch = 20, b
     
     seed_torch(seed=int(seed)) # Seeding 
     #device = torch.device("cuda") # Putting the model to GPU
-    if GPU == 'None':
+    if GPU.lower() == 'none':
         device = torch.device("cuda")
     else:
         device = torch.device("cuda:"+GPU)
@@ -137,6 +137,7 @@ def trainModel(path2Data,seed,iterationNum,GPU ,mode = 'train', nb_epoch = 20, b
         # training UNet
         start_time = time.time()
         epoch_loss_dice = []
+        print('Training started ...')
         for epoch in range(1,nb_epoch+1):
             accum_loss = 0.0
             accum_dice = 0.0
@@ -204,8 +205,10 @@ def trainModel(path2Data,seed,iterationNum,GPU ,mode = 'train', nb_epoch = 20, b
         f.write(total_time)
         f.write('sec')
         f.close()
-
         del model
+        print('Done')
+
+        
     elif mode == 'test':
         if not os.path.exists(os.path.join(taskPath,fold,'Models',fold+'_weights2'+'.pt')):
             print('Model for does not exist')
@@ -214,7 +217,7 @@ def trainModel(path2Data,seed,iterationNum,GPU ,mode = 'train', nb_epoch = 20, b
         for phase in ['test']:
             start_time = time.time()
             path2Model = os.path.join(taskPath,fold,'Models',fold+'_weights2'+'.pt')
-            pred_dir_test = os.path.join(taskPath,fold,'PredictedMasks2',fold+'_'+phase+'_predMasks')
+            pred_dir_test = os.path.join(taskPath,fold,'PredictedMasks2','predMasks')
             if not os.path.exists(pred_dir_test):
                 os.makedirs(pred_dir_test)
             # Loading test data 
@@ -240,7 +243,6 @@ def trainModel(path2Data,seed,iterationNum,GPU ,mode = 'train', nb_epoch = 20, b
             f.write(total_time)
             f.write('sec')
             f.close()
-
         print('DONE')
 if __name__ == "__main__":
 

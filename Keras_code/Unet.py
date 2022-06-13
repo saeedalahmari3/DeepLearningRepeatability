@@ -30,7 +30,7 @@ def init_seeds(gpu,precision,seed=2019):
     session_conf = tf.compat.v1.ConfigProto()
     session_conf = tf.compat.v1.ConfigProto(intra_op_parallelism_threads=1,
                               inter_op_parallelism_threads=1)
-    if not gpu == 'None':
+    if not gpu.lower() == 'none':
         session_conf.gpu_options.visible_device_list = gpu
     os.environ['TF_CUDNN_DETERMINISTIC'] ='true'
     os.environ['TF_DETERMINISTIC_OPS'] = 'true'
