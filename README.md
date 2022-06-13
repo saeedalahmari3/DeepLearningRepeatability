@@ -20,13 +20,16 @@ Then activate the newly created environment ...
 `conda activate TF`  
 
 # How to run the code:  
+
 # 1. Pytorch  
 **Training**  
 To train deep learning model using Pytorch for segmentation, you need to have the data stored in (.npy) format. Our data is currently available upon request. Moreover, GPU computing is required inorder to complete the training using this code.  
 To run the code using **single-floating point precision** do  
 `python3 ./pytorch_code/train_singlePrecision.py -d ./data -GPU 8 -m train -iter 1`  
+The trained model and model summary will be saved in a directory at the same parant folder of *data* directory. The name of the directory is *pytorch_exp_SinglePrecision*        
 To run the code using **double-floating point precision** do  
 `python3 ./pytorch_code/train_doublePrecision.py -d ./data -GPU 8 -m train -iter 1`  
+The trained model and model summary will be saved in a directory at the same parant folder of *data* directory. The name of the directory is *pytorch_exp_DoublePrecision*        
 
 This code will be trained for 20 epochs while using 16 batch size. To run the second model do  
 `python3 ./pytorch_code/train_singlePrecision.py -d ./data -GPU 8 -m train -iter 2`  
@@ -36,8 +39,10 @@ Note you can use any GPU for this experiment. If you are using SLURM for job dis
 Testing the code for each trained model can be done as follows:  
 **single-floating point precision**  
 `python3 ./pytorch_code/train_singlePrecision.py -d ./data -GPU 8 -m test -iter 1`  
+The trained model and model summary will be saved in a directory at the same parant folder of *data* directory. The name of the directory is *KerasTF_exp_SinglePrecision*          
 **double-floating point precision**  
 `python3 ./pytorch_code/train_doublePrecision.py -d ./data -GPU 8 -m test -iter 1`  
+The trained model and model summary will be saved in a directory at the same parant folder of *data* directory. The name of the directory is *KerasTF_exp_DoublePrecision*   
 # 2. Tensorflow and Keras  
 **Training**  
 To train deep learning model using Tensorflow with Keras frontend for segmentation tasks, you need to have the data stored in a (.npy) fromat. Our data is currently available upon request. Moreover, GPU computing is required inorder to complete the training using this code.  
@@ -61,9 +66,10 @@ To apply post-processing, get the path of the experiments, where iterations 1,2,
 
 **Step 1: post-processing of the predicted masks**  
 Navigate to folder post-processing_code `cd post-processing_code`  
-Open *post_processingUpdated2019.m* matlab code and update line 10 to line 13 with the paths of Experiment, Annotations, Disector, Ground Truth respectively as shown below:  
+Open *post_processingUpdated2019.m* matlab code and update line 10 to line 13 with the paths of Experiment, Annotations, Disector, Ground Truth respectively as shown below:   
+Path2Experiment is the path to either *pytorch_exp_SinglePrecision* , *pytorch_exp_DoublePrecision* , *KerasTF_exp_SinglePrecision* , or *KerasTF_exp_DoublePrecision*  depending in the task that you are working on.   
 ```   
-Path2Experiment = '../test_exp';  % Path to experiment example (pytorch_doublePrecision)    
+Path2Experiment = '../pytorch_exp_SinglePrecision';  % Path to experiment example (pytorch_doublePrecision)    
 pathToAnnotation = '../data/Annotation_disector_countFiles/Final_Annotation';   
 pathToDisector = '../data/Annotation_disector_countFiles/Disector_box_images';   
 pathToGT = '../data/Annotation_disector_countFiles/masks';   
@@ -74,7 +80,7 @@ Once the paths are updated, run the main file *post_processingUpdated2019.m* to 
 To start counting and reporting the results.
 Open *getErrorRate.py* and update line 21 and 22 with the path of the experiment and the path to ground truth count (countfiles), as follows:   
 ```   
-path2Experiment = '../test_exp'   
+path2Experiment = '../pytorch_exp_SinglePrecision'   
 pathToManual = r'../data/Annotation_disector_countFiles/countFiles'   
 ```
 Then run the code as follows: `python3 getErrorRate.py`   
