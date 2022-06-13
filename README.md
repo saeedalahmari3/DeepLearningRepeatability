@@ -62,15 +62,17 @@ To apply post-processing, get the path of the experiments, where iterations 1,2,
 **Step 1: post-processing of the predicted masks**  
 Navigate to folder post-processing_code `cd post-processing_code`  
 Open *post_processingUpdated2019.m* matlab code and update line 10 to line 13 with the paths of Experiment, Annotations, Disector, Ground Truth respectively as shown below:  
-`Path2Experiment = '../test_exp';  % Path to experiment example (pytorch_doublePrecision)
-pathToAnnotation = '../data/Annotation_disector_countFiles/Final_Annotation';
-pathToDisector = '../data/Annotation_disector_countFiles/Disector_box_images';
+`Path2Experiment = '../test_exp';  % Path to experiment example (pytorch_doublePrecision)   
+pathToAnnotation = '../data/Annotation_disector_countFiles/Final_Annotation';   
+pathToDisector = '../data/Annotation_disector_countFiles/Disector_box_images';   
 pathToGT = '../data/Annotation_disector_countFiles/masks';`  
 Once the paths are updated, run the main file *post_processingUpdated2019.m* to start post-processing the images. For more info about the post-processing see the papers mentioned above.  
 
 **Step 2: Counting**  
 To start counting and reporting the results.
-Open *getErrorRate.py* and update line 21 and 22 with the path of the experiment and the path to ground truth count (countfiles).  
-Then run the code as follows: `python3 getErrorRate.py`
+Open *getErrorRate.py* and update line 21 and 22 with the path of the experiment and the path to ground truth count (countfiles), as follows:   
+`path2Experiment = '../test_exp'   
+pathToManual = r'../data/Annotation_disector_countFiles/countFiles'`   
+Then run the code as follows: `python3 getErrorRate.py`   
 
 Then in the folder <Path2Experiment> a new folder is created with the name *Error_analysis* which has two files for results of each iteration of training and testing deep learning model.
